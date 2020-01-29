@@ -19,5 +19,14 @@ app.get('/', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
 
-serv.listen(process.env.PORT);
-console.log("Server is listening on port " + process.env.PORT);
+//Connect to database
+data.init(err => {
+   if(!err){
+      //Start the server
+      serv.listen(process.env.PORT);
+      console.log("Server is listening on port " + process.env.PORT);
+   }
+   else{
+      console.error(err);
+   }
+});
