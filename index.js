@@ -1,4 +1,12 @@
-var express = require('express');
+//Main file
+
+//Dependancies
+//Express
+const express = require('express');
+
+//My Modules
+const data = require("./lib/data");
+
 var app = express();
 var serv = require('http').Server(app);
 
