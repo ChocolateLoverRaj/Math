@@ -10,18 +10,18 @@ const data = require("./lib/database");
 var app = express();
 var serv = require('http').Server(app);
 
-//Count number of times the website was visited
-var visits = 0;
-
 app.get('/', function (req, res) {
-   visits++;
-   console.log("Visits: " + visits);
    res.sendFile( __dirname + "/" + "index.html" );
+   //Add to visits
+   data.collection("records", "stats").findOneAndUpdate({}, {$set: {visits: {$add: ["$visits", 1]}}}, (err, res) => {
+      console.log(err);
+   });
 })
 
 //Connect to database
 data.init(err => {
    if(!err){
+      console.log("Connected to mongodb atlas");
       //Start the server
       serv.listen(process.env.PORT);
       console.log("Server is listening on port " + process.env.PORT);
