@@ -13,7 +13,7 @@ var serv = require('http').Server(app);
 app.get('/', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
    //Add to visits
-   data.collection("records", "stats").findOneAndUpdate({}, {$set: {visits: {$add: ["$visits", 1]}}}, (err, res) => {
+   data.collection("records", "stats").findOneAndUpdate({}, {$inc: {visits: 1}}, (err, res) => {
       console.log(err);
    });
 })
