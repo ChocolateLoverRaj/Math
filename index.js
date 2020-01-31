@@ -16,7 +16,11 @@ app.get('/', function (req, res) {
    data.collection("records", "stats").findOneAndUpdate({}, {$inc: {visits: 1}}, (err, res) => {
       console.log(err);
    });
-})
+});
+
+app.get('/api/stats', (req, res) => {
+   res.json({hi: "bye"});
+});
 
 //Connect to database
 data.init(err => {
